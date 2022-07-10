@@ -1,10 +1,18 @@
+import React, { MouseEvent } from 'react';
+import { IconType } from 'react-icons';
+import styles from './Button.module.scss';
+
 interface IButton {
-  onClick: () => void;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
   text: string;
+  Icon?: IconType;
 }
 
-const Button = (props: IButton) => {
-  return <button onClick={props.onClick}>{props.text}</button>;
+const Button = ({ onClick, text, Icon }: IButton) => {
+  return (
+    <button className={styles.Button} onClick={onClick}>
+      {Icon && <Icon className={styles.icon} />} {text}
+    </button>);
 };
 
 export default Button;

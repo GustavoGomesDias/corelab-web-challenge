@@ -1,0 +1,16 @@
+$main-bg: #ececec;
+$blue-search: #c4ece4;
+$blue-btn: #80dfce;
+
+$b-radius: 25px;
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.border-none {
+  border: none;
+  border-radius: $b-radius;
+}

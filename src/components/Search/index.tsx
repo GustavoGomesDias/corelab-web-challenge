@@ -6,7 +6,7 @@ interface ISearch {
 
 const Search = (props: ISearch) => {
   return (
-    <input type="text" placeholder={props.placeholder} value={props.value} />
+    <input type="text" placeholder={props.placeholder} />
   );
 };
 

@@ -1,0 +1,13 @@
+@import '../../styles/variable.scss';
+@import '../../styles/break-points.scss';
+
+.Button {
+  @extend .border-none;
+
+  background-color: $blue-btn;
+  height: 40px;
+  font-weight: bold;
+  padding: 0.5rem 0;
+  gap: 0.5rem;
+  font-size: 1rem;
+}

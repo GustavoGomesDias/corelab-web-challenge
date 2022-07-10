@@ -1,17 +1,51 @@
 @import '../../styles/break-points.scss';
+@import '../../styles/variable.scss';
 
 .Vehicles {
-  display: grid;
-  padding: 1rem 2rem;
+  height: 100vh;
+  width: 100%;
+  background: $main-bg;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 
   .main {
+    padding: 1rem;
+    width: 90%;
     display: grid;
     gap: 1rem;
-    width: 100%;
+
+    input {
+      @extend .border-none;
+
+      background-color: $blue-search;
+      background-image: url(../../../public/assets/svgs/search.svg);
+      background-repeat: no-repeat;
+      background-position: 4% center;
+      background-size: 20px;
+      height: 30px;
+      padding: 0.3rem 2.2rem;
+      width: 100%;
+    }
+
+    .filter {
+      @extend .flex;
+      width: 100%;
+      gap: .2rem;
+
+      button {
+        @extend .flex;
+        background-color: transparent;
+        border: none;
+        font-size: 30px;
+      }
+    }
   }
 
   @include tablet {
-
+    .main {
+      width: 100%;
+    }
   }
 
   @include laptop {
@@ -19,7 +53,10 @@
   }
 
   @include desktop {
-
+    justify-content: center;
+    .main {
+      width: 70%;
+    }
   }
 
   @include desktop-large {
