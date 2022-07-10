@@ -40,6 +40,7 @@
   }
 
   @include laptop {
+    overflow-y: hidden;
     width: 60%;
     button {
       cursor: pointer;

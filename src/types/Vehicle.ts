@@ -1,5 +1,5 @@
 export interface IVehicle {
-  id: number;
+  _id: string;
   name: string;
   description: string;
   plate: string;
@@ -9,3 +9,5 @@ export interface IVehicle {
   price: number;
   createdAt: Date;
 }
+
+export type VehicleCard = Omit<IVehicle, '_id' | 'createdAt'>;

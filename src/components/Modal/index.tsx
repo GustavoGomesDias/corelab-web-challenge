@@ -5,9 +5,10 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 export interface ModalProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   isOpen: boolean
+  children: JSX.Element | JSX.Element[]
 }
 
-const Modal = ({ setIsOpen, isOpen }: ModalProps): JSX.Element => {
+const Modal = ({ setIsOpen, isOpen, children }: ModalProps): JSX.Element => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const handleOutsideClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -34,7 +35,9 @@ const Modal = ({ setIsOpen, isOpen }: ModalProps): JSX.Element => {
             <AiOutlineArrowLeft />
           </button>
         </div>
-        <p className={styles.content}>Modal</p>
+        <div className={styles.content}>
+          {children}
+        </div>
       </div >
     </>
   )

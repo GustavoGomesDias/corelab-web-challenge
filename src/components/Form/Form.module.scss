@@ -1,0 +1,19 @@
+@import "../../styles/variable.scss";
+.wrapper {
+  @extend .flex;
+  width: 100%;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: #fff;
+    padding: 2.5em 1em;
+    width: 80%;
+    .button-group {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

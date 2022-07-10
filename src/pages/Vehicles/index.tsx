@@ -1,8 +1,8 @@
 import { useEffect, useState, MouseEvent } from "react";
 import { IoOptionsOutline } from "react-icons/io5";
-import { AiOutlinePlus  } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 import { getVehicles } from "../../lib/api";
-import { Button, Card, Modal, Search } from "../../components";
+import { Button, Card, Modal, Search, Form, Input, CreateForm, FilterForm } from "../../components";
 import styles from "./Vehicles.module.scss";
 import { IVehicle } from "../../types/Vehicle";
 
@@ -28,7 +28,7 @@ const VehiclesPage = () => {
 
   return (
     <div className={styles.Vehicles}>
-      {isOpen && <Modal setIsOpen={setIsOpen} isOpen={isOpen} />}
+      {isOpen && <Modal setIsOpen={setIsOpen} isOpen={isOpen} children={(<FilterForm />)} />}
       <main className={styles.main}>
         <div className={styles.filter}>
           <Search placeholder="Search" value={search} onChange={() => { }} />
@@ -37,11 +37,26 @@ const VehiclesPage = () => {
 
         <Button Icon={AiOutlinePlus} text="Adicionar" onClick={(e) => handleOpenModal(e)} />
 
-        <Card title="Sandero Stepway">
-          <p>Price: 22000</p>
-          <p>Description: Carro usado por 2 anos...</p>
-          <p>Year: 2018</p>
-        </Card>
+        <div className={styles['card-grid']}>
+          <Card vehicle={{
+            name: 'Sandero Stepway',
+            color: 'red',
+            description: 'Descrição provisória',
+            plate: 'ABCD1234',
+            price: 29000.90,
+            isFavorite: true,
+            year: 2010,
+          }} />
+          <Card vehicle={{
+            name: 'Sandero Stepway',
+            color: 'yellow',
+            description: 'Descrição provisória',
+            plate: 'ABCD1234',
+            price: 29000.90,
+            isFavorite: true,
+            year: 2010,
+          }} />
+        </div>
       </main>
     </div>
   );

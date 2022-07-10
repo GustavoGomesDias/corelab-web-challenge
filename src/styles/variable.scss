@@ -14,3 +14,9 @@ $b-radius: 25px;
   border: none;
   border-radius: $b-radius;
 }
+
+.form-input {
+  height: 30px;
+  border-radius: $b-radius;
+  padding: 0 0.5rem;
+}
