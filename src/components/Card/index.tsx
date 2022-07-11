@@ -34,7 +34,7 @@ const Card = ({ vehicle }: ICard) => {
   }, [vehicle.color]);
 
   return (
-    <div className={styles.Card} style={{ background: cardColor, color: fontColorCard }}>
+    <div key={vehicle.plate} className={styles.Card} style={{ background: cardColor, color: fontColorCard }}>
       <div className={styles['button-group']} style={{ color: fontColorCard }} >
         <button><BiEdit color={fontColorCard} /></button>
         <button><AiOutlineCloseCircle color={fontColorCard} /></button>

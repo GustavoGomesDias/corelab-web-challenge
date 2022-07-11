@@ -18,10 +18,10 @@ const Toast = ({ id, text }: ToastProps): JSX.Element => {
 
   return (
     <div className={styles.wrapper}>
+      <span className={styles.time} />
       <p className={styles.content}>
         {text}
       </p>
-      <span className={styles.time} />
     </div>
   );
 }

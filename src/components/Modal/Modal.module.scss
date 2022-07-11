@@ -13,8 +13,6 @@
   opacity: 1;
   animation: showOverlay 300ms ease;
   @extend .flex;
-  
-
 }
 
 .modal {
@@ -39,6 +37,7 @@
       background-color: transparent;
       height: 30px;
       font-size: 20px;
+      cursor: pointer;
     }
   }
 

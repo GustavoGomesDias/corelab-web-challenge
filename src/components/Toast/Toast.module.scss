@@ -13,6 +13,12 @@
   box-shadow: 0 0 1em rgba($color: #000000, $alpha: 0.4);
   flex-direction: column;
   animation: showToast 500ms ease;
+  z-index: 100;
+
+
+  p {
+    text-align: center;
+  }
 
   .time {
     display: inline-block;

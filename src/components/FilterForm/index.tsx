@@ -2,9 +2,10 @@ import React, { useState, FormEvent } from 'react';
 import Form from '../Form';
 import Input from '../Input';
 import Select from '../Select';
+import { ModalFormProps } from '../VehicleForm';
 import styles from './FilterForm.module.scss';
 
-const FilterForm = (): JSX.Element => {
+const FilterForm = ({ setIsOpen }: ModalFormProps): JSX.Element => {
   const [brand, setBrand] = useState<string>('');
   const [color, setColor] = useState<string>('');
   const [year, setYear] = useState<number>(1900);
@@ -13,6 +14,8 @@ const FilterForm = (): JSX.Element => {
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
+
+    setIsOpen(false);
   }
 
   return (

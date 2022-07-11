@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import LoaderProvider from './context/LoadContext';
 import ToastProvider from './context/ToastContext';
 import './index.module.scss';
 import VehiclesPage from './pages/Vehicles';
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ToastProvider>
-      <VehiclesPage />
+      <LoaderProvider>
+        <VehiclesPage />
+      </LoaderProvider>
     </ToastProvider>
   </React.StrictMode>
 );
