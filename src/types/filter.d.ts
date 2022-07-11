@@ -1,7 +1,7 @@
 export interface FilterInfo {
   name: string
   color: string
-  ano: number
+  year: number
   minPrice: number
   maxPrice: number
 }

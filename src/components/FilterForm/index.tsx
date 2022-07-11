@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+import useVehicleControl from '../../hooks/useVehicleControl';
 import Form from '../Form';
 import Input from '../Input';
 import Select from '../Select';
@@ -12,9 +13,21 @@ const FilterForm = ({ setIsOpen }: ModalFormProps): JSX.Element => {
   const [minPrice, setMinPrice] = useState<string>('');
   const [maxPrice, setMaxPrice] = useState<string>('');
 
+  const { handleAddVehiclesInFilterList } = useVehicleControl();
+
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
+    const data = {
+      name,
+      color,
+      year,
+      minPrice: Number(minPrice),
+      maxPrice: Number(maxPrice),
+    }
+
+
+    handleAddVehiclesInFilterList(data);
     setIsOpen(false);
   }
 
