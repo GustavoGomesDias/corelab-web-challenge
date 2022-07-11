@@ -39,6 +39,7 @@
         background-color: transparent;
         border: none;
         font-size: 30px;
+        cursor: pointer;
       }
     }
   }
@@ -75,6 +76,10 @@
     justify-content: center;
     .main {
       width: 70%;
+
+      input {
+        background-position: 1% center;
+      }
     }
   }
 

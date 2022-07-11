@@ -1,4 +1,4 @@
-const API = "http://localhost:3000";
+const API = "http://localhost:3000/vehicle";
 
 const endpoint = (path: string): string => API + path;
 

@@ -1,4 +1,5 @@
 @import "../../styles/variable.scss";
+@import "../../styles/break-points.scss";
 .wrapper {
   @extend .flex;
   width: 100%;
@@ -14,6 +15,12 @@
       width: 100%;
       display: flex;
       justify-content: flex-end;
+    }
+  }
+
+  @include desktop-large {
+    .form {
+      width: 70%;
     }
   }
 }

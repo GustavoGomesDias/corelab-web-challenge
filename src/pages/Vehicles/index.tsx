@@ -1,11 +1,12 @@
 import { useEffect, useState, MouseEvent } from "react";
 import { IoOptionsOutline } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
-import { getVehicles } from "../../lib/api";
+import { getVehicles } from "../../services/api";
 import { Button, Card, Modal, Search, CreateForm, FilterForm, Loader } from "../../components";
 import styles from "./Vehicles.module.scss";
 import { IVehicle } from "../../types/Vehicle";
 import ActionLoader from "../../components/ActionLoader";
+import api from "../../services/fetchAPI/init";
 
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
@@ -14,8 +15,11 @@ const VehiclesPage = () => {
 
   useEffect(() => {
     const fetchVehicles = async () => {
-      const payload = await getVehicles();
-      setVehicles(payload);
+      const response = await api.get('/');
+      if (response.data.error) {
+        setVehicles([]);
+      }
+      setVehicles(response.data.content as IVehicle[]);
     };
 
     fetchVehicles();
