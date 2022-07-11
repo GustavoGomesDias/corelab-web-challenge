@@ -6,7 +6,7 @@ import { ModalFormProps } from '../VehicleForm';
 import styles from './FilterForm.module.scss';
 
 const FilterForm = ({ setIsOpen }: ModalFormProps): JSX.Element => {
-  const [brand, setBrand] = useState<string>('');
+  const [name, setName] = useState<string>('');
   const [color, setColor] = useState<string>('');
   const [year, setYear] = useState<number>(1900);
   const [minPrice, setMinPrice] = useState<string>('');
@@ -20,7 +20,7 @@ const FilterForm = ({ setIsOpen }: ModalFormProps): JSX.Element => {
 
   return (
     <Form handleSubmit={handleSubmit}>
-      <Select label="Marca" values={[]} setValue={setBrand} />
+      <Select label="Nome" values={[]} setValue={setName} />
       <Select label="Cor" values={[]} setValue={setColor} />
       <Select label="Ano" values={[]} setValue={setYear} />
       <div className={styles.price}>

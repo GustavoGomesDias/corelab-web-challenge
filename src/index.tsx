@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import VehicleControlProvider from './context/control/vehicle/VehicleProvider';
 import LoaderProvider from './context/LoadContext';
 import ToastProvider from './context/ToastContext';
 import './index.module.scss';
@@ -11,11 +12,15 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+
     <ToastProvider>
       <LoaderProvider>
-        <VehiclesPage />
+        <VehicleControlProvider>
+          <VehiclesPage />
+        </VehicleControlProvider>
       </LoaderProvider>
     </ToastProvider>
+
   </React.StrictMode>
 );
 

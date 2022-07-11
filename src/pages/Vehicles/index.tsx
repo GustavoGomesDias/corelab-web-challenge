@@ -6,6 +6,7 @@ import styles from "./Vehicles.module.scss";
 import { IVehicle } from "../../types/Vehicle";
 import api from "../../services/fetchAPI/init";
 import useToast from "../../hooks/useToast";
+import useVehicleControl from "../../hooks/useVehicleControl";
 
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
@@ -13,25 +14,16 @@ const VehiclesPage = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [modalChildre, setModalChildren] = useState<JSX.Element | JSX.Element[]>(<FilterForm setIsOpen={setIsOpen} />)
   const { addToast } = useToast();
+  const { allVehicles, handleAddAllVehicles } = useVehicleControl();
 
   useEffect(() => {
     const fetchVehicles = async () => {
-      addToast('Não tem veículos cadastrados')
-      const response = await api.get('/');
-      if (response.data.error) {
-        setVehicles([]);
-
-        return;
-      }
-      setVehicles(response.data.content as IVehicle[]);
-
-      if ((response.data.content as IVehicle[]).length <= 0) {
-        addToast('Não tem veículos cadastrados')
-      }
+      await handleAddAllVehicles();
+      setVehicles(allVehicles);
     };
 
     fetchVehicles();
-  }, []);
+  }, [allVehicles]);
 
   const handleOpenModal = (e: MouseEvent<HTMLButtonElement>, type: 'add' | 'filter') => {
 

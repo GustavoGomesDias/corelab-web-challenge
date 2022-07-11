@@ -11,11 +11,11 @@ export interface ModalFormProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>> 
 }
 
-export interface VehicleForm extends ModalFormProps {
+export interface VehicleFormProps extends ModalFormProps {
   id?: string
 }
 
-const VehicleForm = ({ setIsOpen, id }: VehicleForm): JSX.Element => {
+const VehicleForm = ({ setIsOpen, id }: VehicleFormProps): JSX.Element => {
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [color, setColor] = useState<string>('');
@@ -38,10 +38,13 @@ const VehicleForm = ({ setIsOpen, id }: VehicleForm): JSX.Element => {
           setYear(vehicle.year);
           setPlate(vehicle.plate);
           setPrice(vehicle.price);
-        } 
+        } else {
+          addToast('Id inválido ou veículo não existente.');
+        }
       }
     }
 
+    setEditVehicle();
   }, [id]);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
