@@ -15,7 +15,7 @@ export default class FetchAPI<T> {
   }
 
   async get(complementUrl: string): Promise<FetchReturns<T>> {
-    const result = await fetch(`${this.apiURL}/${complementUrl}`, {
+    const result = await fetch(`${this.apiURL}${complementUrl}`, {
       method: 'GET',
       headers: { ...this.headers },
     });
@@ -29,7 +29,7 @@ export default class FetchAPI<T> {
   }
 
   async getWithBody(complementUrl: string, info: unknown): Promise<FetchReturns<T>> {
-    const result = await fetch(`${this.apiURL}/${complementUrl}`, {
+    const result = await fetch(`${this.apiURL}${complementUrl}`, {
       method: 'POST',
       headers: { ...this.headers },
       body: JSON.stringify(info),
@@ -44,7 +44,7 @@ export default class FetchAPI<T> {
   }
 
   async post(complementUrl: string, info: any): Promise<FetchReturns<T>> {
-    const result = await fetch(`${this.apiURL}/${complementUrl}`, {
+    const result = await fetch(`${this.apiURL}${complementUrl}`, {
       method: 'POST',
       headers: { ...this.headers },
       body: JSON.stringify(info),
@@ -59,7 +59,7 @@ export default class FetchAPI<T> {
   }
 
   async delete(complementUrl: string): Promise<FetchReturns<T>> {
-    const result = await fetch(`${this.apiURL}/${complementUrl}`, {
+    const result = await fetch(`${this.apiURL}${complementUrl}`, {
       method: 'DELETE',
       headers: { ...this.headers },
     });
@@ -73,7 +73,7 @@ export default class FetchAPI<T> {
   }
 
   async put(complementUrl: string, info: any): Promise<FetchReturns<T>> {
-    const result = await fetch(`${this.apiURL}/${complementUrl}`, {
+    const result = await fetch(`${this.apiURL}${complementUrl}`, {
       method: 'PUT',
       headers: { ...this.headers },
       body: JSON.stringify(info),

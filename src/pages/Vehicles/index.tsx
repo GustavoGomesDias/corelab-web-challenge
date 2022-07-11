@@ -2,20 +2,23 @@ import { useEffect, useState, MouseEvent } from "react";
 import { IoOptionsOutline } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
 import { getVehicles } from "../../services/api";
-import { Button, Card, Modal, Search, CreateForm, FilterForm, Loader } from "../../components";
+import { Button, Card, Modal, Search, CreateForm, FilterForm, Loader, Toast } from "../../components";
 import styles from "./Vehicles.module.scss";
 import { IVehicle } from "../../types/Vehicle";
 import ActionLoader from "../../components/ActionLoader";
 import api from "../../services/fetchAPI/init";
+import useToast from "../../hooks/useToast";
 
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [search, setSearch] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { addToast } = useToast();
 
   useEffect(() => {
     const fetchVehicles = async () => {
       const response = await api.get('/');
+      console.log(response);
       if (response.data.error) {
         setVehicles([]);
       }

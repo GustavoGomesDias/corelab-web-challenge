@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import ToastProvider from './context/ToastContext';
 import './index.module.scss';
 import VehiclesPage from './pages/Vehicles';
 import reportWebVitals from './reportWebVitals';
@@ -9,7 +10,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <VehiclesPage />
+    <ToastProvider>
+      <VehiclesPage />
+    </ToastProvider>
   </React.StrictMode>
 );
 
