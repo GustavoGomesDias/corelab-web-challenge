@@ -12,6 +12,8 @@
   z-index: 10;
   opacity: 1;
   animation: showOverlay 300ms ease;
+  @extend .flex;
+  
 
 }
 

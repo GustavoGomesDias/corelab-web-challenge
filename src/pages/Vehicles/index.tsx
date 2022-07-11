@@ -2,9 +2,10 @@ import { useEffect, useState, MouseEvent } from "react";
 import { IoOptionsOutline } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
 import { getVehicles } from "../../lib/api";
-import { Button, Card, Modal, Search, Form, Input, CreateForm, FilterForm } from "../../components";
+import { Button, Card, Modal, Search, CreateForm, FilterForm, Loader } from "../../components";
 import styles from "./Vehicles.module.scss";
 import { IVehicle } from "../../types/Vehicle";
+import ActionLoader from "../../components/ActionLoader";
 
 const VehiclesPage = () => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
@@ -36,8 +37,9 @@ const VehiclesPage = () => {
         </div>
 
         <Button Icon={AiOutlinePlus} text="Adicionar" onClick={(e) => handleOpenModal(e)} />
-
-        <div className={styles['card-grid']}>
+        <Loader />
+        {/* <ActionLoader /> */}
+        {/* <div className={styles['card-grid']}>
           <Card vehicle={{
             name: 'Sandero Stepway',
             color: 'red',
@@ -56,7 +58,7 @@ const VehiclesPage = () => {
             isFavorite: true,
             year: 2010,
           }} />
-        </div>
+        </div> */}
       </main>
     </div>
   );

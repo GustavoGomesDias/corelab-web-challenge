@@ -9,7 +9,7 @@ const CreateForm = (): JSX.Element => {
   const [year, setYear] = useState<number>(1900);
   const [plate, setPlate] = useState<string>('');
 
-  const handleSubmit = (e: FormEvent): void => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
   }
 
