@@ -10,4 +10,4 @@ export interface IVehicle {
   createdAt: Date;
 }
 
-export type VehicleCard = Omit<IVehicle, '_id' | 'createdAt'>;
+export type VehicleCard = Omit<IVehicle, 'createdAt'>;

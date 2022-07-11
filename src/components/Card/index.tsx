@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import { BiEdit } from 'react-icons/bi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { BsHeart, BsHeartFill } from 'react-icons/bs';
-import {  VehicleCard } from "../../types/Vehicle";
+import { IVehicle, VehicleCard } from "../../types/Vehicle";
 import { colorNameToHex, getFontColor, hexToRgb } from "../../util/helpers";
 import { isHexColor, isValidColor } from "../../util/validations";
 import styles from "./Card.module.scss";
+import useVehicleControl from "../../hooks/useVehicleControl";
+import Modal from "../Modal";
+import VehicleForm from "../VehicleForm";
 
 interface ICard {
   vehicle: VehicleCard
@@ -14,6 +17,11 @@ interface ICard {
 const Card = ({ vehicle }: ICard) => {
   const [cardColor, setCardColor] = useState<string>('white');
   const [fontColorCard, setFontColorCard] = useState<string>('white');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [modalChildre, setModalChildren] = useState<JSX.Element | JSX.Element[]>(<VehicleForm setIsOpen={setIsOpen}/>);
+
+
+  const { handleAddVehicleInFavorites, handleRemoveVehicle, handleAddAllVehicles, handleRemoveVehicleFromFavorites } = useVehicleControl();
 
   useEffect(() => {
     const handleSetCardColor = () => {
@@ -33,12 +41,40 @@ const Card = ({ vehicle }: ICard) => {
 
   }, [vehicle.color]);
 
+  const handleEdit = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setModalChildren(<VehicleForm setIsOpen={setIsOpen} id={vehicle._id} />);
+    setIsOpen(true);
+  }
+
+  const handleDelete = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+
+    await handleRemoveVehicle(vehicle._id);
+  }
+
+  const handleAddFavorite = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    if (!vehicle.isFavorite) {
+      await handleAddVehicleInFavorites(vehicle as IVehicle);
+      await handleAddAllVehicles();
+      return;
+    } else {
+      await handleRemoveVehicleFromFavorites(vehicle as IVehicle);
+      await handleAddAllVehicles();
+      return;
+    }
+  }
+
   return (
     <div key={vehicle.plate} className={styles.Card} style={{ background: cardColor, color: fontColorCard }}>
+      {isOpen && <Modal setIsOpen={setIsOpen} isOpen={isOpen} children={(modalChildre)} />}
+
       <div className={styles['button-group']} style={{ color: fontColorCard }} >
-        <button><BiEdit color={fontColorCard} /></button>
-        <button><AiOutlineCloseCircle color={fontColorCard} /></button>
-        <button>{vehicle.isFavorite ? <BsHeartFill  color={fontColorCard} /> : <BsHeart color={fontColorCard} />}</button>
+        <button onClick={(e) => handleEdit(e)}><BiEdit color={fontColorCard} /></button>
+        <button onClick={async (e) => await handleDelete(e)}><AiOutlineCloseCircle color={fontColorCard} /></button>
+        <button onClick={async (e) => await handleAddFavorite(e)}>{vehicle.isFavorite ? <BsHeartFill color={fontColorCard} /> : <BsHeart color={fontColorCard} />}</button>
       </div>
       <h2>{vehicle.name}</h2>
       <div className={styles.content}>

@@ -1,14 +1,17 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import useLoad from '../../hooks/useLoader';
 import useToast from '../../hooks/useToast';
+import useVehicleControl from '../../hooks/useVehicleControl';
 import api from '../../services/fetchAPI/init';
+import { FetchReturns } from '../../types/fetch';
+import { HttpResponse } from '../../types/http';
 import { IVehicle } from '../../types/Vehicle';
 import { validationField, validationPlate, validationYear } from '../../util/validations';
 import Form from '../Form';
 import Input from '../Input';
 
 export interface ModalFormProps {
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>> 
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface VehicleFormProps extends ModalFormProps {
@@ -23,6 +26,7 @@ const VehicleForm = ({ setIsOpen, id }: VehicleFormProps): JSX.Element => {
   const [plate, setPlate] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
 
+  const { handleAddAllVehicles } = useVehicleControl()
   const { addToast } = useToast();
   const load = useLoad();
 
@@ -72,14 +76,32 @@ const VehicleForm = ({ setIsOpen, id }: VehicleFormProps): JSX.Element => {
 
     setIsOpen(false);
     load.enableLoader();
-    const response = await api.post('/', {
-      name,
-      plate,
-      description,
-      year,
-      color,
-      price,
-    })
+    let response: FetchReturns<HttpResponse>;
+    if (!id) {
+      response = await api.post('/', {
+        name,
+        plate,
+        description,
+        year,
+        color,
+        price,
+      });
+
+      await handleAddAllVehicles();
+    } else {
+      response = await api.put('/', {
+        id,
+        name,
+        plate,
+        description,
+        year,
+        color,
+        price,
+      });
+
+      await handleAddAllVehicles();
+    }
+
     load.disableLoader();
 
     if (response.data.error) {

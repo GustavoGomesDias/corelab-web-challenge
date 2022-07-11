@@ -21,10 +21,10 @@ export interface VehicleControlAction {
 
 const reducer = (state: VehicleControlState, action: VehicleControlAction): VehicleControlState => {
   if (action.type === 'ADD_ALL_VEHICLES') {
-
+    const favorites = (action.vehicles as IVehicle[]).filter((vehicle) => vehicle.isFavorite);
     return {
       allVehicles: [...(action.vehicles as IVehicle[])],
-      favorites: [...state.favorites],
+      favorites: [...favorites],
       searchResultVehicles: [...state.searchResultVehicles],
       filterResultVehicles:  [...state.filterResultVehicles],
     }

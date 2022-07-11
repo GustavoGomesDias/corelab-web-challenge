@@ -1,12 +1,14 @@
+import { ChangeEvent } from "react";
+
 interface ISearch {
   placeholder: string;
   value: string;
-  onChange: () => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Search = (props: ISearch) => {
+const Search = ({ value, placeholder, onChange }: ISearch) => {
   return (
-    <input type="text" placeholder={props.placeholder} />
+    <input type="text" placeholder={placeholder} onChange={onChange} />
   );
 };
 

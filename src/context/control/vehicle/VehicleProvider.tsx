@@ -13,7 +13,6 @@ export interface VehicleControlProviderProps {
 
 const VehicleControlProvider = ({ children }: VehicleControlProviderProps): JSX.Element => {
   const { addToast } = useToast();
-  const { enableLoader, disableLoader } = useLoad();
 
   const [vehicleState, dispatchVehicleAction] = useReducer(reducer, {
     allVehicles: [],
@@ -23,9 +22,7 @@ const VehicleControlProvider = ({ children }: VehicleControlProviderProps): JSX.
   });
 
   const handleAddAllVehicles = async () => {
-    enableLoader();
     const response = await api.get('/');
-    disableLoader();
 
     if (response.data.error) {
       addToast(response.data.error);
@@ -41,9 +38,7 @@ const VehicleControlProvider = ({ children }: VehicleControlProviderProps): JSX.
   }
 
   const handleRemoveVehicle = async (id: string) => {
-    enableLoader();
     const response = await api.delete(`/${id}`);
-    disableLoader();
 
     if (response.data.error) {
       addToast(response.data.error);
@@ -58,13 +53,13 @@ const VehicleControlProvider = ({ children }: VehicleControlProviderProps): JSX.
   }
 
   const handleAddVehicleInFavorites = async (vehicle: IVehicle) => {
-    enableLoader();
-    const { isFavorite, ...rest } = vehicle;
+    console.log(vehicle);
+    const { isFavorite, _id, ...rest } = vehicle;
     const response = await api.put('/', {
+      id: _id,
       ...rest,
       isFavorite: true,
     });
-    disableLoader();
 
     if (response.data.error) {
       addToast(response.data.error);
@@ -75,6 +70,7 @@ const VehicleControlProvider = ({ children }: VehicleControlProviderProps): JSX.
     dispatchVehicleAction({
       type: 'ADD_IN_FAVORITE',
       vehicle: {
+        _id,
         ...rest,
         isFavorite: true,
       },
@@ -82,14 +78,12 @@ const VehicleControlProvider = ({ children }: VehicleControlProviderProps): JSX.
   }
 
   const handleRemoveVehicleFromFavorites = async (vehicle: IVehicle) => {
-    enableLoader();
-    const { isFavorite, ...rest } = vehicle;
+    const { isFavorite, _id, ...rest } = vehicle;
     const response = await api.put('/', {
+      id: _id,
       ...rest,
       isFavorite: false,
     });
-    disableLoader();
-
     if (response.data.error) {
       addToast(response.data.error);
 
